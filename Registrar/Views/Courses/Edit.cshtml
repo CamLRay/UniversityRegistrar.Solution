@@ -18,6 +18,9 @@
   @Html.LabelFor(model => model.CourseNum)
   @Html.TextBoxFor(model => model.CourseNum)
 
+  @Html.Label("Select department")
+  @Html.DropDownList("DepartmentId")
+
   <input type="submit" value="Save" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>

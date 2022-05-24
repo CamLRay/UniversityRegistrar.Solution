@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+@using Registrar.Models;
+
+<section class="student-list">
+  @foreach(Department department in Model)
+  {
+    <li>@Html.ActionLink($"{department.Name}", "Details", new { id = department.DepartmentId }, new {@Class = "student-list-item" })</li>
+  }
+</section>
+
+<p>@Html.ActionLink("Add new department", "Create", null, null, new { @Class = "btn btn-primary"})</p>
