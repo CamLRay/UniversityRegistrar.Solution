@@ -11,12 +11,11 @@
   <h3>No courses have been added yet!</h3>
 } 
 
-<ul>
+<section class="student-list">
   @foreach(Course course in Model)
   {
-    <li>@Html.ActionLink($"{course.Name}", "Details", new { id = course.CourseId })</li>
+    <li>@Html.ActionLink($"{course.Name} {course.CourseNum}", "Details", new { id = course.CourseId }, new {@Class = "student-list-item" })</li>
   }
-</ul>
+</section>
 
-<p>@Html.ActionLink("Add new course", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p>@Html.ActionLink("Add new course", "Create", null, null, new { @Class = "btn btn-primary"})</p>

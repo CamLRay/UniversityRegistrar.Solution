@@ -15,15 +15,17 @@
 else
 {
   <h4>Students courses:</h4>
-  <ul>
+  <section class="student-list">
   @foreach(var join in Model.JoinEntities)
   {
-    <li>@join.Course.Name</li>
+    <li>@Html.ActionLink($"{join.Course.Name} {join.Course.CourseNum}", "Details", "Courses", new { id = join.Course.CourseId }, new {@Class = "student-list-item"})</li>
   }
-  </ul>
+  </section>
 }
 
 
-<p>@Html.ActionLink("Edit Student", "Edit", new { id = Model.StudentId })</p>
-<p>@Html.ActionLink("Delete Student", "Delete", new { id = Model.CourseId })</p>
-<p>@Html.ActionLink("Add Student To Another Course", "AddCourse", new { id = Model.StudentId })</p>
+<nav>
+  <p>@Html.ActionLink("Edit Student", "Edit", new { id = Model.StudentId }, new { @Class = "btn btn-primary"})</p>
+  <p>@Html.ActionLink("Delete Student", "Delete", new { id = Model.StudentId }, new { @Class = "btn btn-primary"})</p>
+  <p>@Html.ActionLink("Add Student To Another Course", "AddCourse", new { id = Model.StudentId }, new { @Class = "btn btn-primary"})</p>
+</nav>

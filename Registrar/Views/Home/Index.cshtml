@@ -1,8 +1,7 @@
 @{
-  Layout = "_Layout";
+  Layout="_Splash";
 }
+@await Html.PartialAsync("Header")
+<img src="https://media.istockphoto.com/photos/young-asian-business-team-work-together-in-project-brainstorm-meeting-picture-id1216442841?k=20&m=1216442841&s=612x612&w=0&h=lVrwfRKb1c1zIJXgcnD8BhEPQvK1EsDD6E47ndJaw6o=" alt="students studying" class="banner-img">
+@await Html.PartialAsync("Navbar")
 
-<h1>Welcome to the Student Portal</h1>
-<p>@Html.ActionLink("See all students.", "Index", "Students")</p> 
-<br>
-<p>@Html.ActionLink("See all courses.", "Index", "Courses")</p>

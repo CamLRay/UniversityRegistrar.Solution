@@ -19,15 +19,11 @@
 
   @foreach (Student student in Model)
   {
-    @* <div class="student-list-item"> *@
       <li>@Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId }, new {@Class = "student-list-item" })</li>
-    @* </div> *@
   }
   
 </section>
 
-<p>@Html.ActionLink("Add new Student", "Create")</p>
-
-<br>
-
-<p>@Html.ActionLink("Go Home", "Index", "Home")</p>
+<nav>
+  <p>@Html.ActionLink("Add new Student", "Create", "Students" , null, new { @Class = "btn btn-primary"})</p>
+</nav>
