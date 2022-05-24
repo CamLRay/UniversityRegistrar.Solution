@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Registrar.Models.Course
+
+<h2>Course Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
+
+<section class="student-list">
+@foreach(var join in Model.JoinEntities)
+  {
+      <li>@Html.ActionLink($"{join.Student.Name}", "Details", "Students", new { id = join.Student.StudentId}, new {@Class = "student-list-item" })</li>
+  }
+  </section>
+
+<nav>
+  <p>@Html.ActionLink("Edit Course", "Edit", new { id = Model.CourseId }, new { @Class = "btn btn-primary"})</p>
+  <p>@Html.ActionLink("Delete Course", "Delete", new { id = Model.CourseId }, new { @Class = "btn btn-primary"})</p>
+</nav>
