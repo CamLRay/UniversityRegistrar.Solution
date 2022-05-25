@@ -35,7 +35,7 @@ namespace Registrar.Controllers
       _db.SaveChanges();
       if (CourseId != 0)
       {
-        _db.CourseStudent.Add(new CourseStudent() { CourseId = CourseId, StudentId = student.StudentId });
+        _db.CourseStudent.Add(new CourseStudent() { CourseId = CourseId, StudentId = student.StudentId, PassFail = false});
         _db.SaveChanges();
       }
       return RedirectToAction("Index");
@@ -55,17 +55,17 @@ namespace Registrar.Controllers
       var thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
       ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Name");
       ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
-      // ViewBag.TaskComplete = new List<SelectListStudent>(){ new SelectListStudent() { Text = "Yes", Value = "True" }, new SelectListStudent() { Text = "No", Value = "False" }};
+      ViewBag.PassFail = new List<SelectListItem>(){ new SelectListItem() { Text = "Passed", Value="True"}, new SelectListItem(){ Text = "Failed", Value ="False"}};
       return View(thisStudent);
     }
 
     [HttpPost]
     public ActionResult Edit(Student student, int CourseId)
     {
-      if (CourseId != 0)
-      {
-        _db.CourseStudent.Add(new CourseStudent() { CourseId = CourseId, StudentId = student.StudentId });
-      }
+      // if (CourseId != 0 && (student.StudentId != _db.CourseStudent.FirstOrDefault(course => course.CourseId == CourseId).StudentId))
+      // {
+      //   _db.CourseStudent.Add(new CourseStudent() { CourseId = CourseId, StudentId = student.StudentId });
+      // }
       _db.Entry(student).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -110,6 +110,23 @@ namespace Registrar.Controllers
       _db.CourseStudent.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult UpdatePassFail(int joinId)
+    {
+      var joinEntry = _db.CourseStudent.FirstOrDefault(entry => entry.CourseStudentId == joinId);
+      if (joinEntry.PassFail == true)
+      {
+        joinEntry.PassFail = false;
+      }
+      else if (joinEntry.PassFail == false)
+      {
+        joinEntry.PassFail = true;
+      }
+      _db.Entry(joinEntry).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Edit", new { id = joinEntry.StudentId});
     }
   }
 }

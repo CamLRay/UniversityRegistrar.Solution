@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Registrar.Models.Department
+
+@if(@Model.Students.Count == 0)
+  {
+    <h4>This Department does not contain any students yet!</h4>
+  }
+  else
+  {
+    <h4>Students in this Department</h4>
+      @foreach (var student in Model.Students)
+      {
+      <li>@Html.ActionLink($"{student.Name}", "Details", "Students", new { id = student.StudentId })</li>
+      }
+  }

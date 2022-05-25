@@ -4,9 +4,7 @@
 
 @model Registrar.Models.Student
 
-<h2>Student Account Page.</h2>
-
-<h4> @Html.DisplayFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h4>
+<h2>Student Account Page: @Html.DisplayFor(model => model.Name)</h2>
 
 @using (Html.BeginForm())
 {
@@ -15,14 +13,35 @@
   @Html.LabelFor(model => model.Name)
   @Html.EditorFor(model => model.Name)
 
-  @Html.Label("Course to enroll")
-  @Html.DropDownList("CourseId")
-
   @Html.Label("Select department")
   @Html.DropDownList("DepartmentId")
 
   <input type="submit" value="Save" />
-}
 
-<p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Back Home", "Index", "Home")</p>
+  @if(@Model.JoinEntities.Count == 0)
+{
+  <p>This student does not contain any knowledge</p>
+}
+else
+{
+  <h4>Students courses:</h4>
+  <section class="student-list">
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@Html.ActionLink($"{join.Course.Name} {join.Course.CourseNum}", "Details", "Courses", new { id = join.Course.CourseId }, new {@Class = "student-list-item"})| @join.PassFail</li>
+    <div class="flex-btn">
+      @using (Html.BeginForm("DeleteCourse", "Students"))
+      {
+        @Html.Hidden("joinId", @join.CourseStudentId)
+        <input type="submit" value="Delete" class="btn btn-primary"/>
+      }
+      @using (Html.BeginForm("UpdatePassFail", "Students"))
+      {
+        @Html.Hidden("joinId", @join.CourseStudentId)
+        <input type="submit" value="update" class="btn btn-primary" />
+      }
+    </div>
+  }
+  </section>
+}
+}

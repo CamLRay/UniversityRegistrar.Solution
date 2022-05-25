@@ -38,6 +38,7 @@ namespace Registrar.Controllers
     public ActionResult Edit(int id)
     {
       ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
+      ViewBag.PassFail = new List<SelectListItem>(){new SelectListItem(){Text = "Passed", Value = "True"}, new SelectListItem(){ Text = "Incomplete", Value="False"}};
       var thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
       return View(thisCourse);
     }

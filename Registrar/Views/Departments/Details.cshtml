@@ -23,7 +23,11 @@ else
     <li>@Html.ActionLink($"{course.Name}", "Details", "Courses", new { id = course.CourseId})</li>
   }
 }
+<nav>
+  <p>@Html.ActionLink("See Students in Department", "DetailsStudents", new { id = Model.DepartmentId }, new { @Class = "btn btn-primary"})</p>
+</nav>
 
+@*
 @if(@Model.Students.Count == 0)
   {
     <h4>This Department does not contain any students yet!</h4>
@@ -36,7 +40,7 @@ else
       <li>@Html.ActionLink($"{student.Name}", "Details", "Students", new { id = student.StudentId })</li>
       }
   }
-
+*@
 
 @*
 <nav>

@@ -18,7 +18,7 @@ else
   <section class="student-list">
   @foreach(var join in Model.JoinEntities)
   {
-    <li>@Html.ActionLink($"{join.Course.Name} {join.Course.CourseNum}", "Details", "Courses", new { id = join.Course.CourseId }, new {@Class = "student-list-item"})</li>
+    <li>@Html.ActionLink($"{join.Course.Name} {join.Course.CourseNum}", "Details", "Courses", new { id = join.Course.CourseId }, @join.PassFail ? new {@Class = "student-list-item pass"} : new {@Class = "student-list-item fail"})</li>
   }
   </section>
 }

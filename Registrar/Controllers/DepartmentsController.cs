@@ -47,5 +47,12 @@ namespace Registrar.Controllers
         return View(thisDepartment);
     }
 
+    public ActionResult DetailsStudents(int id)
+    {     
+        var thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
+            
+        return View(thisDepartment);
+    }
+
     }
 }

@@ -1,0 +1,10 @@
+@using Registrar.Models;
+@model List<Registrar.Models.Student>;
+<section class="student-list">
+
+  @foreach (Student student in Model)
+  {
+      <li>@Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId }, new {@Class = "student-list-item" })</li>
+  }
+  
+</section>
